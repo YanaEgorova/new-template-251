@@ -1,0 +1,26 @@
+:root {
+  --main-bg-color: #fff;
+  --sub-bg-color: #000;
+  --main-text-color: #000;
+  --sub-text-color: #fff;
+  --inactive: #818181;
+  --success: #bee3be;
+  --link-color: blue;
+  --accent-color: #ff0000;
+  --active: #6bff21;
+
+
+  
+  --first-brand-color: #cbd5df;
+  --second-brand-color: #9aaec5;
+  --third-brand-color: #400e70;
+  --fourth-brand-color: #df1a4d;
+
+
+
+  --main-font: 'Montserrat';
+  --title-font: 'Montserrat Medium';
+  --main-title-font: 'Montserrat Bold';
+
+  font-size: 62.5%;
+}
