@@ -3,6 +3,7 @@ import {localStorage} from './local-storage.js';
 import { getLocalStorageItem } from './local-storage.js';
 import {setAmountToCartSpan} from './on-load.js';
 import {showSuccessMessage} from './add-to-cart.js';
+import { products } from './data/products.js';
 const incrementBtn = document.querySelector('.js_prod__btn-more');
 const decrementBtn = document.querySelector('.js_prod__btn-less');
 const calculateBtns = document.querySelectorAll('.js_prod__btn');
@@ -18,10 +19,13 @@ if(name) {
 incrementBtn.addEventListener('click', increment);
 decrementBtn.addEventListener('click', decrement);
 addProductPageBtn.addEventListener('click', cartAdd);
-calculateTotal(Number(amountSpan.textContent));
+//calculateTotal(Number(amountSpan.textContent));
 
 export const minAmount = 1;
 export const maxAmount = 12;
+
+incrementBtn.click();
+decrementBtn.click();
 
 
 
@@ -69,6 +73,13 @@ function cartAdd(e) {
 }
 
 function increment(e) {
+
+    let btn = e.currentTarget;
+    let parent = btn.closest('.js_prod__block');
+    let id = parent.getAttribute('id');
+
+    let currentProduct = products.find(product => product.id == id);
+
     decrementBtn.classList.remove('disable-btn');
     if(e.currentTarget.classList.contains('disable-btn')) {
         return;
@@ -78,12 +89,28 @@ function increment(e) {
     // if(Number(amountSpan.textContent) === maxAmount) {
     //     e.currentTarget.classList.add('disable-btn');
     // }
-    calculateTotal(Number(amountSpan.textContent));
+
+    if(Number(amountSpan.textContent) == currentProduct.nutraRange.length){
+        e.currentTarget.classList.add('disable-btn');
+    }
+
+    if(currentProduct.type == 'nutra'){
+        calculateTotalNutra(Number(amountSpan.textContent), currentProduct);
+    }else{
+        calculateTotal(Number(amountSpan.textContent));
+    }
+
+    
 }
 
 function decrement(e) {
-    console.log('decrement')
-    // incrementBtn.classList.remove('disable-btn');
+
+    let btn = e.currentTarget;
+    let parent = btn.closest('.js_prod__block');
+    let id = parent.getAttribute('id');
+    
+    let currentProduct = products.find(product => product.id == id);
+    incrementBtn.classList.remove('disable-btn');
     // if(e.currentTarget.classList.contains('disable-btn')) {
     //     return;
     // }
@@ -92,7 +119,12 @@ function decrement(e) {
     if(Number(amountSpan.textContent) === minAmount) {
     e.currentTarget.classList.add('disable-btn');
     }
-    calculateTotal(Number(amountSpan.textContent));
+    
+    if(currentProduct.type == 'nutra'){
+        calculateTotalNutra(Number(amountSpan.textContent), currentProduct);
+    }else{
+        calculateTotal(Number(amountSpan.textContent));
+    }
 }
 
 function calculateTotal(amount) {
@@ -100,6 +132,9 @@ function calculateTotal(amount) {
    priceSpan.textContent = `$${(productPrice * amount).toFixed(2)}`;
 }
 
+function calculateTotalNutra(amount, product) {
+    priceSpan.textContent = `${amount} bottle${amount>1 ? 's' : ''} for $${(product.nutraRange[amount-1]).toFixed(2)}`;
+}
 
 
 function priceAmount(value) {

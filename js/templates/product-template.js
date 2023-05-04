@@ -5,7 +5,7 @@ import { dropdown } from './size-dropdown.js';
 export const productTemplate = (product, amount) => {
     var clothingSizes = ["XS", "S", "M", "L", "XL"];
     var ringSizes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"];
-   
+
     return `
    <div class="prod__block js_prod__block" id="${product.id}">
    <div class="prod__img-box">
@@ -19,7 +19,7 @@ export const productTemplate = (product, amount) => {
            <h1 class="prod__title js_prod__title">${product.name}</h1>
            <div class="prod__price-box">
                <span class="prod__price">$
-                   <span class="js_price">${(product.price).toFixed(2)}</span>
+                   <span class="js_price">${product.type == 'nutra' ? (product.price).toFixed(2) + ' - ' + (product.nutraRange[product.nutraRange.length - 1]).toFixed(2) : (product.price).toFixed(2)}</span>
                </span>
      
                

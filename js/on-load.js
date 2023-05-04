@@ -39,8 +39,13 @@ function shopPageFunctional() {
    cartField.value = JSON.stringify(getCartFulfillment());
    
    let total = 0;
+   let productTotal;
    dataArray.forEach(product => {
-      const productTotal = Number((product.quantity * product.price).toFixed(2));
+      if(product.type == 'nutra'){
+        productTotal = Number((product.nutraRange[product.quantity-1]).toFixed(2));
+      }else{
+        productTotal = Number((product.quantity * product.price).toFixed(2));
+      }
       total = total + productTotal;
       tableRow.insertAdjacentHTML('afterend', tableRowTemplate(product));
    });
