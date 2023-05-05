@@ -39,7 +39,7 @@ c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z" />
                </svg>
            </button>
          
-           <span class="prod__amount-span js_prod__amount-span">${amount || 1}</span>
+           <span class="prod__amount-span js_prod__amount-span">${1}</span>
          
            <button class="prod__btn prod__btn-more js_prod__btn js_prod__btn-more">
                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

@@ -40,9 +40,31 @@ function shopPageFunctional() {
    
    let total = 0;
    let productTotal;
+   let nutraAmount;
    dataArray.forEach(product => {
       if(product.type == 'nutra'){
-        productTotal = Number((product.nutraRange[product.quantity-1]).toFixed(2));
+        
+        productTotal = 0;
+        nutraAmount = product.quantity;
+        let overflow = false;
+
+        if(nutraAmount > product.nutraRange.length){
+          productTotal = Number((product.nutraRange[(product.quantity-1) % product.nutraRange.length]).toFixed(2));
+          if(product.quantity % product.nutraRange.length != 0){
+              nutraAmount = nutraAmount - ((product.quantity) % product.nutraRange.length);
+          }else{
+              nutraAmount = nutraAmount - product.nutraRange.length;
+          }
+          overflow = true;
+        }else{
+          productTotal = product.nutraRange[(product.quantity-1)];
+        }
+
+        while(nutraAmount >= product.nutraRange.length && overflow){ 
+          productTotal += Number((product.nutraRange[(nutraAmount-1) % product.nutraRange.length]).toFixed(2));
+          nutraAmount = nutraAmount - product.nutraRange.length;
+        }
+        
       }else{
         productTotal = Number((product.quantity * product.price).toFixed(2));
       }
