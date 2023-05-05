@@ -145,11 +145,7 @@
                   class="js_success-product-name"></span> to your shopping cart!</p>
             </div>
 
-            <div class="swiper mySwiper">
-            <ul class="swiper-wrapper js_products__list products__list"></ul>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            </div>
+            <ul class="js_products__list products__list"></ul>
 
           </section>
         </div>
@@ -225,22 +221,7 @@
       document.body.classList.toggle('open-menu');
     })
   </script>
-  <script src="./js/swiper-bundle.min.js"></script>
-  <script>
-    var swiper = new Swiper(".mySwiper", {
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        1440: {
-          slidesPerView: 3,
-          spaceBetween: 5,
-          watchSlidesProgress: true,
-        }
-      }
-    });
-  </script>
+
 
 </body>
 
